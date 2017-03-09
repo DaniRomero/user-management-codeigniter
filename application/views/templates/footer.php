@@ -10,6 +10,39 @@
 			<script type="text/javascript">
 
 				$(function () {
+					$('#email').focusin(function(event) {
+						$('#msgEmail').html("<span style='color:#f00'></span>");
+					});
+					$('#email').focusout(function(event) {
+						var emailReg = /^[a-zA-Z0-9_\.\-]+@[a-zA-Z0-9\-]+\.[a-zA-Z0-9\-\.]+$/;
+						if ( $('#email').val()=="" || !emailReg.test($('#email').val())){
+							$('#msgEmail').html("<span style='color:#f00'>Ingrese un correo valido</span>");
+						}else{
+							$.ajax({
+								url: '/test/index.php/users/check_email_ajax',
+								type: 'POST',
+								data: "email="+$('#email').val()
+							})
+							.done(function(response) {
+								if (response.length == 4)
+									$('#msgEmail').html("<span style='color:#f00'>Email disponible</span>");
+								else
+									$('#msgEmail').html("<span style='color:#f00'>Email no disponible</span>");
+							})
+							.fail(function(e) {
+								console.log(e);
+								console.log("error");
+							})
+							.always(function(response) {
+								if (response.length == 4)
+									$('#msgEmail').html("<span style='color:#f00'>Email disponible</span>");
+								else
+									$('#msgEmail').html("<span style='color:#f00'>Email no disponible</span>");
+							});
+							
+						}
+					});
+
 					$("form[name='user']").validate({
 					    // Specify validation rules
 					    rules: {

@@ -8,7 +8,7 @@
         </tr>
         <tr>
             <td><label for="email">Email</label></td>
-            <td><input class="form-control" type="input" name="email" size="50" value="<?php echo $user['email']; ?>" /></td>
+            <td><input class="form-control" type="input" id="email" name="email" size="50" value="<?php echo $user['email']; ?>" /></td>
         </tr>
         <tr>
             <td><label for="phone">Phone</label></td>

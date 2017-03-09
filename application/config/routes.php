@@ -52,6 +52,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 $route['default_controller'] = 'users/index';
 $route['users'] = 'users';
 $route['users/create'] = 'users/create';
+$route['users/check_email_ajax'] = "users/check_email_ajax";
  
 $route['users/edit/(:any)'] = 'users/edit/$1';
  

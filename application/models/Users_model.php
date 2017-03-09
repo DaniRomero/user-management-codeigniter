@@ -5,6 +5,16 @@ class Users_model extends CI_Model {
     {
         $this->load->database();
     }
+
+    public function verificar_email($email){
+        $this->db->where('email', $email);
+        $query = $this->db->get('users');
+        if ($query->num_rows() == 1){
+            $row = $query->row();
+            return $row->email;
+        }
+
+    }
     
     public function get_users($role = FALSE)
     {

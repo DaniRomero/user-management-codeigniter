@@ -20,6 +20,17 @@ class Users extends CI_Controller {
         $this->load->view('user/index', $data);
         $this->load->view('templates/footer');
     }
+
+    public function check_email_ajax(){
+        $email = $this->input->post('email');
+        $check_email = $this->users_model->verificar_email($email);
+        if ($check_email){
+            echo "";
+            return FALSE;
+        }
+        echo "good";
+        return TRUE;
+    }
     
     public function create()
     {
@@ -30,7 +41,7 @@ class Users extends CI_Controller {
         $data['title'] = 'Create a new user';
  
         $this->form_validation->set_rules('name', 'Name', 'trim|required');
-        $this->form_validation->set_rules('email', 'Email', 'trim|required|valid_email');
+        $this->form_validation->set_rules('email', 'Email', 'trim|required|valid_email|callback_check_email_ajax');
         $this->form_validation->set_rules('phone', 'Phone', 'trim|required|regex_match[/^[0-9]{12}$/]');
         $this->form_validation->set_rules('age', 'Age', 'trim|required');
         $this->form_validation->set_rules('role', 'Role', 'trim|required');
@@ -68,7 +79,7 @@ class Users extends CI_Controller {
         $data['roles'] = $this->roles_model->get_roles();
         
         $this->form_validation->set_rules('name', 'Name', 'trim|required');
-        $this->form_validation->set_rules('email', 'Email', 'trim|required|valid_email');
+        $this->form_validation->set_rules('email', 'Email', 'trim|required|valid_email|callback_check_email_ajax');
         $this->form_validation->set_rules('phone', 'Phone', 'trim|required|regex_match[/^[0-9]{12}$/]');
         $this->form_validation->set_rules('age', 'Age', 'trim|required');
         $this->form_validation->set_rules('role', 'Role', 'trim|required');

@@ -8,7 +8,8 @@
         </tr>
         <tr>
             <td><label for="email">Email</label></td>
-            <td><input class="form-control" type="input" name="email" size="50" /></td>
+            <td><input class="form-control" type="input" id="email" name="email" size="50" /></td>
+            <span id="msgEmail"></span>
         </tr>
         <tr>
             <td><label for="phone">Phone</label></td>
